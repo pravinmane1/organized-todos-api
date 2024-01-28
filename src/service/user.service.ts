@@ -1,10 +1,32 @@
+import { string } from "zod";
 import UserModel, { UserInput } from "../models/user.model";
-import logger from '../utils/logger'
+import logger from "../utils/logger";
+import { omit } from "lodash";
 
 export const createUser = async (input: UserInput) => {
   try {
-    return await UserModel.create(input);
-} catch (e: any) {
+    const user =await UserModel.create(input);
+    return omit(user.toJSON(), "password");
+
+  } catch (e: any) {
     throw new Error(e);
   }
+};
+
+export const validatePassword = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return false;
+  }
+  const isValid = await user.comparePassword(password);
+  if (!isValid) {
+    return false;
+  }
+  return omit(user.toJSON(), "password");
 };
