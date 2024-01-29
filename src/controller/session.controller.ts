@@ -9,7 +9,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   const user = await validatePassword(req.body);
 
   if (!user) {
-    return res.status(401).send("Invalid email or password");
+    return res.status(401).send("Invalid Email or Password");
   }
   //create session
   const session = await createSession(user._id, req.get("user-agent") || "");
@@ -27,7 +27,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   return res.send({ accessToken, refreshToken });
 };
 
-export const getUserSessionsHandler = async (req: Request, res: Response) => {
+export const getUserSessionsHandler = async (_: Request, res: Response) => {
   console.log("user ", res.locals.user);
   const userId = res.locals.user._id;
   const sessions = await findSessions({ user: userId, valid: true });

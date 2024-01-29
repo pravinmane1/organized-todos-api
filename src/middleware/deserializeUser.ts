@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { get } from "lodash";
 import { verifyJwt } from "../utils/jwt.utils";
-import logger from "../utils/logger";
 
 export const deserializeUser = (
   req: Request,

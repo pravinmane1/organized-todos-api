@@ -8,6 +8,7 @@ import {
 } from "./controller/session.controller";
 import { createSessionSchema } from "./schema/session.schema";
 import { requiredUser } from "./middleware/requiredUser";
+
 const routes = (app: Express) => {
   app.get("/healthcheck", (_: Request, res: Response) => {
     res.sendStatus(200);

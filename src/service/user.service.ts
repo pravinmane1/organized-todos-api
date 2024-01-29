@@ -1,6 +1,4 @@
-import { string } from "zod";
 import UserModel, { UserInput } from "../models/user.model";
-import logger from "../utils/logger";
 import { omit } from "lodash";
 
 export const createUser = async (input: UserInput) => {

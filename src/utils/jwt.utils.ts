@@ -2,7 +2,6 @@ import { SignOptions, sign, verify } from "jsonwebtoken";
 import config from "config";
 
 const privateKey = config.get<string>("privateKey");
-const publicKey = config.get<string>("publicKey");
 export const signJwt = (object: Object, options?: SignOptions | undefined) => {
   return sign(object, privateKey, { ...(options || {}), algorithm: "RS256" });
 };
