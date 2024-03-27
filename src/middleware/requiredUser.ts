@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 export const requiredUser = (
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction
 ) => {

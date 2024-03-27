@@ -1,4 +1,4 @@
-import { SignOptions, sign, verify } from "jsonwebtoken";
+import { JwtPayload, SignOptions, sign, verify } from "jsonwebtoken";
 import config from "config";
 
 const privateKey = config.get<string>("privateKey");
@@ -7,8 +7,7 @@ export const signJwt = (object: Object, options?: SignOptions | undefined) => {
 };
 export const verifyJwt = (token: string) => {
   try {
-    const decoded = verify(token, privateKey);
-    console.log("jwt verify return is ", decoded);
+    const decoded = verify(token, privateKey) as JwtPayload;
     return {
       valid: true,
       expired: false,
